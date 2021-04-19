@@ -1,0 +1,32 @@
+<div class="w3-container w3-light-grey" style="padding:135px 16px">
+    <div class="w3-row-padding">
+        <div class="w3-col m6 w3-center">
+            <h1>LOGIN</h1>
+        </div>
+        <div class="w3-col m6">
+            <p class="w3-wide">Username</p>
+            <div class="w3-grey">
+                <input class="w3-input w3-border w3-padding-20" type="text" 
+                [formControl] = "username" [(ngModel)] = "user.username" placeholder="username" name="username">
+                <div *ngIf="username.touched && !username.valid">Invalid Username</div>
+            </div>
+            <p class="w3-wide">Password</p>
+            <div class="w3-grey">
+                <input class="w3-input w3-border w3-padding-20" type="password" 
+                [formControl] = "password" [(ngModel)] = "user.password" placeholder="password" name="password">
+                <div *ngIf="password.touched && !password.valid">Invalid Password</div>
+            </div>
+            <p>
+                <button class="w3-button w3-black" type="submit">
+                    LOGIN
+                </button>
+            </p>
+            <p class="w3-wide">Don't have account? </p>
+            <p>
+                <button (click)="getRegisterComponent()" class="w3-button w3-black" type="submit">
+                    REGISTER
+                </button>
+            </p>
+        </div>
+    </div>
+</div>

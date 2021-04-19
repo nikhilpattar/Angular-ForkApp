@@ -1,0 +1,33 @@
+<p>laptop works!</p>
+<div class="w3-container" style="padding:90px 16px">
+    <h3 class="w3-center">LAPTOPS</h3>
+    <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+        <div *ngFor="let laptop of laptops">
+
+            <div class="w3-col l3 m6 w3-margin-bottom">
+                <div class="w3-card">
+                    <!-- <img src="laptop.lImage" alt="laptop.lName" style="width:100%" /> -->
+                    <div class="w3-dropdown-hover">
+                        <img src="img_snowtops.jpg" alt="Norway" style="width:20%">
+                        <div class="w3-dropdown-content" style="width:300px">
+                            <img src="img_snowtops.jpg" alt="Norway" style="width:100%">
+                        </div>
+                    </div>
+                    <div class="w3-container">
+                        <h3>{{laptop.lName}}</h3>
+                        <h4><i class="fa fa-inr"></i>{{laptop.lPrice}}</h4>
+                        <p><button class="w3-button w3-black w3-block">
+                            Buy</button>
+                    </p>
+                    <p>
+                        <button class="w3-button w3-black w3-block">
+                            Add To Cart</button>
+                    </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
