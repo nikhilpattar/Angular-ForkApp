@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
+import { Cart } from './Cart';
 
 @Component({
   selector: 'app-cart',
@@ -7,50 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  items: any;
+  items: Cart[] = [];
 
-  constructor() {
+  constructor(private cartService: CartService) {
   }
 
   ngOnInit(): void {
+    this.getCartItems("nikhil");
   }
 
-  getItems() {
-    this.items = [
-      {
-        Name: "Atomic Haits",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\atomic_habits.jpg",
-        Price: 568,
-        Description: "Atomic Habits",
-      },
-      {
-        Name: "Believe",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\believe.jpg",
-        Price: 667,
-        Description: "Believe",
-      },
-      {
-        Name: "Acer",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Laptops\\acer.jpg",
-        Price: 55000,
-        Description: "Acer",
-      }, {
-        Name: "HP",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\hp.jpg",
-        Price: 66700,
-        Description: "HP",
-      },
-      {
-        Name: "One Plus 6T",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Mobiles\\oneplus6t.jpg",
-        Price: 34600,
-        Description: "Samsung S20",
-      }, {
-        Name: "Samsung S20",
-        Image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Mobiles\\samsungs20.jpg",
-        Price: 86700,
-        Description: "Samsung S20",
-      }];
+  getCartItems(username: String): void{
+    this.cartService.getCartItemsFromServices(username).subscribe((res: Cart[]) =>{
+      this.items = res;
+    })
   }
 
+  deleteItemFromCart(id: String): void{
+    this.cartService.deleteCartItemFromServices(id);
+    this.getCartItems("nikhil");
+  }
 }

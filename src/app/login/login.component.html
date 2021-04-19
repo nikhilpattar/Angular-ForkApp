@@ -17,7 +17,7 @@
                 <div *ngIf="password.touched && !password.valid">Invalid Password</div>
             </div>
             <p>
-                <button class="w3-button w3-black" type="submit">
+                <button (click)="validateUser()" class="w3-button w3-black" type="submit">
                     LOGIN
                 </button>
             </p>

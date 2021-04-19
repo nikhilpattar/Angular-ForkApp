@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
+import { Cart } from '../cart/Cart';
+import { LaptopService } from '../laptop.service';
+import { Laptop } from './Laptop';
 
 @Component({
   selector: 'app-laptop',
@@ -7,26 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LaptopComponent implements OnInit {
 
-  laptops: any;
+  laptops: Laptop[] = [];
+  temp: Laptop[] = [];
 
-  constructor() { }
+  constructor(private laptopService: LaptopService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getLaptops();
   }
 
-  getLaptops(){
-    this.laptops = [{
-      lName: "Acer",
-      lImage: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Laptops\\acer.jpg",
-      lPrice: 55000,
-      lDescription: "Acer",
-    }, {
-      lName: "HP",
-      lImage: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\hp.jpg",
-      lPrice: 66700,
-      lDescription: "HP",
-    }];
+  getLaptops(): void{
+    this.laptopService.getLaptopsFromServices().subscribe((res: Laptop[]) =>{
+      this.laptops = res;
+      this.temp = res;
+    });
   }
 
+  addLaptopToCart(laptop: Laptop):void{
+    let available = false;
+
+    this.temp.forEach((lap: Laptop) =>{
+      if(lap.id === laptop.id){
+        available = true;
+      }
+    })
+    if(available){
+      window.alert("Item is already available in cart")
+    }
+    let cart = new Cart();
+    cart.username = "nikhil";
+    cart.name = laptop.name;
+    cart.price = laptop.price;
+    cart.description = laptop.description;
+
+    this.cartService.addCartItemToServices(cart);
+  }
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../book.service';
+import { CartService } from '../cart.service';
+import { Cart } from '../cart/Cart';
+import { Book } from './Book';
 
 @Component({
   selector: 'app-book',
@@ -7,27 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
-  books: any;
+  books: Array<Book> = [];
 
-  constructor() { }
+  constructor(private bookService: BookService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getBooks();
   }
 
-  getBooks() {
-    this.books = [{
-      id: 101,
-      name: "Atomic Habits",
-      image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\atomic_habits.jpg",
-      price: 568,
-      description: "Atomic Habits",
-    }, {
-      id: 102,
-      name: "Believe",
-      image: "F:\\Reloaded\\Jigsaw\\ForkApp_Resources\\Books\\believe.jpg",
-      price: 667,
-      description: "Believe",
-    }];
+  getBooks(): void{
+    this.bookService.getBooksFromServices().subscribe((res: Book[]) =>{
+      this.books = res;
+    })
+  }
+
+  addBookToCart(book: Book): void{
+    let cart = new Cart();
+    cart.username = "nikhil";
+    cart.name = book.name;
+    cart.price = book.price;
+    cart.description = book.description;
+    
+    this.cartService.addCartItemToServices(cart);
   }
 }

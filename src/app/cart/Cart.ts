@@ -1,5 +1,6 @@
-export class Book{
-    "id": Number;
+export class Cart{
+    "id": String;
+    "username": String;
     "name": String;
     "price": Number;
     "description": String;
