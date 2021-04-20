@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegisterService } from '../register.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ export class RegisterComponent implements OnInit {
 
   userDetails : any = {};
 
-  constructor(private router: Router) { }
+  constructor(private route: Router,
+    private registerService: RegisterService) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +25,7 @@ export class RegisterComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
 
   register(): void{
-    console.log(this.userDetails);
-    this.router.navigate(['/login']);
+    this.registerService.addUserToService(this.userDetails);
+    this.route.navigate(['/login']);
   }
-
 }

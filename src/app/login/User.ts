@@ -1,8 +1,8 @@
 export class User{
-    "uId": Number;
-    "firstName": String;
-    "secondName": String;
-    "email": String;
-    "username": String;
-    "password": String;
+    "uId": string;
+    "firstName": string;
+    "secondName": string;
+    "email": string;
+    "username": string;
+    "password": string;
 }

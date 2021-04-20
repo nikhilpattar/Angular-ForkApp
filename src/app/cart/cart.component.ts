@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
+import { LoginService } from '../login.service';
 import { Cart } from './Cart';
 
 @Component({
@@ -10,22 +12,29 @@ import { Cart } from './Cart';
 export class CartComponent implements OnInit {
 
   items: Cart[] = [];
+  authenticated: Boolean = false;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+    private loginService: LoginService,
+    private route: Router) {
   }
 
   ngOnInit(): void {
-    this.getCartItems("nikhil");
+    this.authenticated = this.loginService.isAuthenticated;
+    if(!this.authenticated){
+      this.route.navigate(['/login']);
+    }
+    this.getCartItems(this.loginService.user.username);
   }
 
-  getCartItems(username: String): void{
+  getCartItems(username: string): void{
     this.cartService.getCartItemsFromServices(username).subscribe((res: Cart[]) =>{
       this.items = res;
     })
   }
 
-  deleteItemFromCart(id: String): void{
+  deleteItemFromCart(id: string): void{
     this.cartService.deleteCartItemFromServices(id);
-    this.getCartItems("nikhil");
+    this.getCartItems(this.loginService.user.username);
   }
 }

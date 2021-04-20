@@ -14,10 +14,10 @@
             <div class="w3-grey">
                 <input class="w3-input w3-border w3-padding-20" type="password" 
                 [formControl] = "password" [(ngModel)] = "user.password" placeholder="password" name="password">
-                <div *ngIf="password.touched && !password.valid">Invalid Password</div>
+                <div *ngIf="password.touched && !password.valid">Invalid Password(minimum length = 5)</div>
             </div>
             <p>
-                <button (click)="validateUser()" class="w3-button w3-black" type="submit">
+                <button (click)="validateUserCredentials()" class="w3-button w3-black" type="submit">
                     LOGIN
                 </button>
             </p>

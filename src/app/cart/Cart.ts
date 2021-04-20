@@ -1,7 +1,7 @@
 export class Cart{
-    "id": String;
-    "username": String;
-    "name": String;
-    "price": Number;
-    "description": String;
+    "id": string;
+    "username": string;
+    "name": string;
+    "price": number;
+    "description": string;
 }

@@ -12,14 +12,14 @@ export class CartService {
 
   addCartItemToServices(cart : Cart): void{
     console.log(cart);
-    this.http.post('http://localhost:8700/cart', cart);
+    this.http.post<Cart>('http://localhost:8700/cart', cart);
   }
 
-  getCartItemsFromServices(username: String): Observable<any>{
+  getCartItemsFromServices(username: string): Observable<any>{
     return this.http.get(`http://localhost:8700/cart/${username}`);
   }
 
-  deleteCartItemFromServices(id: String): void{
+  deleteCartItemFromServices(id: string): void{
     this.http.delete(`http://localhost:8700/cart/${id}`);
   }
 }

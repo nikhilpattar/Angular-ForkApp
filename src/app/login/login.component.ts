@@ -11,28 +11,35 @@ import { User } from './User';
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {};
-  isAuthenticated: Boolean = false;
+  user: User = {
+    uId: "",
+    firstName: "",
+    secondName: "",
+    email: "",
+    username: "",
+    password: ""
+  };
 
-  constructor(private router: Router,
+  constructor(private route: Router,
     private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
-  validateUser(): void{
+  validateUserCredentials(): void{
     this.loginService.validateUser(this.user).subscribe((res: User) =>{
       this.user = res;
-    })
+    });
+    
     if(this.user !== null || this.user !== undefined){
-      this.isAuthenticated = true;
+      this.route.navigate(['/home']);
     }
   }
 
   getRegisterComponent(): void{
-    this.router.navigate(['/register']);
+    this.route.navigate(['/register']);
   }
 
   username = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
-  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(5)]);
 }

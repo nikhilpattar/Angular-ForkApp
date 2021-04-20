@@ -10,7 +10,6 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getBooksFromServices(): Observable<any> {
-    console.log("Called")
     return this.http.get('http://localhost:8200/books');
   }
 }
